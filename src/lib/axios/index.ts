@@ -57,7 +57,7 @@ axiosInstance.interceptors.response.use(
           failedQueue.push({ resolve, reject });
         })
           .then((token) => {
-            originalRequest.headers.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczMTY1MDI4MSwianRpIjoiZDVlMjJmODUtNDY0MS00MjNlLTlhOTAtZDUxNmYxN2NjOGM1IiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiIzN2MyM2VmYy1jNzE4LTQ3ZWItOTlhOS1iMTMzMzI2YjdlOTciLCJuYmYiOjE3MzE2NTAyODEsImNzcmYiOiJlMWFjNWJmYS1iNjk2LTRkNDQtYTM2OS0xNjcxYzUzMDNkNDAiLCJleHAiOjE3MzIyNTUwODF9.oZOp-68u2-0Nj1U_GvsBn_1nOrKjnXh79R1jHG5Ul5w`;
+            originalRequest.headers.Authorization = `Bearer ${token}`;
             return axiosInstance(originalRequest);
           })
           .catch((err) => Promise.reject(err));
