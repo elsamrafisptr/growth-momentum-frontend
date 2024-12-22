@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/command";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import axiosInstance from "@/lib/axios";
+import useIsMobile from "@/hooks/useIsMobile";
 
 const UserPreferenceForm = () => {
   const { formData, setFormData, setIsOpen, setCurrentStep } =
@@ -28,6 +29,7 @@ const UserPreferenceForm = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isListVisible, setIsListVisible] = useState(false);
   const [preferences, setPreferences] = useState<string[]>([]);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const fetchPreferences = async () => {
@@ -139,7 +141,7 @@ const UserPreferenceForm = () => {
             </div>
           )}
         </PopoverTrigger>
-        <PopoverContent side="right">
+        <PopoverContent side={isMobile ? "bottom" : "right"}>
           <Command>
             <CommandInput placeholder="Search Preference" />
             <CommandList>

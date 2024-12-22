@@ -20,7 +20,7 @@ const NewUserModal = () => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent
-        className="sm:max-w-[425px] [&>button]:hidden"
+        className="max-w-80 rounded-lg sm:max-w-[425px] [&>button]:hidden"
         onInteractOutside={(e) => e.preventDefault()}
       >
         <DialogHeader>

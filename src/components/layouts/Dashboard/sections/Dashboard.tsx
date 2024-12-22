@@ -5,12 +5,16 @@ import { useEffect, useState } from "react";
 import NewUserModal from "./newUserModal/NewUserModal";
 import { NewUserModalProvider } from "@/context/NewUserModalContext";
 import axiosInstance from "@/lib/axios";
+import useIsMobile from "@/hooks/useIsMobile";
+import { cn } from "@/lib/utils";
 
 const Dashboard = () => {
   const [profile, setProfile] = useState<any>(null);
   const [recommendations, setRecommendations] = useState<CardProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  const isMobile = useIsMobile();
 
   const fetchData = async () => {
     try {
@@ -80,7 +84,7 @@ const Dashboard = () => {
         <NewUserModal />
       </NewUserModalProvider>
 
-      <div className="w-full h-full flex p-12">
+      <div className="w-full h-full flex p-5 md:p-12 mt-20 md:mt-0">
         <div className="flex flex-col gap-4 items-center">
           {/* Recommendations For You */}
           <div className="flex flex-col gap-4 w-full">
@@ -91,7 +95,12 @@ const Dashboard = () => {
             ) : error ? (
               <p className="text-red-500">{error}</p>
             ) : (
-              <div className="grid grid-cols-3 gap-6">
+              <div
+                className={cn(
+                  "grid gap-6",
+                  isMobile ? "grid-cols-1" : "grid-cols-3"
+                )}
+              >
                 {recommendations
                   .slice(0, 21)
                   .map((course: CardProps, index: number) => (
