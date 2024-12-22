@@ -1,7 +1,7 @@
-import React from "react";
+import Bookmark from "@/components/layouts/Bookmark";
 
 const BookmarkPage = () => {
-  return <div>BookmarkPage</div>;
+  return <Bookmark />;
 };
 
 export default BookmarkPage;

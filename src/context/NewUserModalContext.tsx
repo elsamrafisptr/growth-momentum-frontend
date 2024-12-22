@@ -1,4 +1,3 @@
-import { getUserDetailsData } from "@/lib/axios/services/profile";
 import {
   createContext,
   ReactNode,
@@ -47,14 +46,20 @@ export const NewUserModalProvider = ({
     activity: "",
     preferences: [],
   });
+  const [isProfileLoaded, setIsProfileLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    if (profile.preferences.length === 0) {
+    if (!profile || profile.preferences?.length === 0) {
       setIsOpen(true);
     } else {
       setIsOpen(false);
     }
-  }, [isOpen, profile, setIsOpen]);
+    setIsProfileLoaded(true);
+  }, [profile]);
+
+  useEffect(() => {
+    if (!isProfileLoaded) return;
+  }, [isProfileLoaded]);
 
   const value = useMemo(
     () => ({
@@ -67,6 +72,7 @@ export const NewUserModalProvider = ({
     }),
     [isOpen, currentStep, formData]
   );
+
   return (
     <NewUserModalContext.Provider value={value}>
       {children}

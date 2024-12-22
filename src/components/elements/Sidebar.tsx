@@ -89,7 +89,7 @@ const Sidebar = () => {
         )}
       >
         <div>
-          <h1 className="p-6">jago binggow</h1>
+          <h1 className="p-6 font-bold italic underline">Growth Momentum</h1>
           <nav className="flex flex-col items-center gap-2.5 mt-4">
             {SIDEBAR_NAVIGATION.map((item, index) => (
               <article key={index} className="w-full">
