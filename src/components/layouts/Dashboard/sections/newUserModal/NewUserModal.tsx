@@ -8,10 +8,10 @@ import {
 import UserDetailForm from "./DetailForm";
 import UserPreferenceForm from "./PreferenceForm";
 import { useNewUserModal } from "@/context/NewUserModalContext";
-import { useCallback, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 
 const NewUserModal = () => {
-  const { isOpen, setIsOpen, currentStep, setCurrentStep } = useNewUserModal();
+  const { isOpen, setIsOpen, currentStep } = useNewUserModal();
 
   const renderForm = useMemo(() => {
     return currentStep === 1 ? <UserDetailForm /> : <UserPreferenceForm />;

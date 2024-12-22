@@ -5,8 +5,11 @@ interface FailedRequest {
   reject: (error: any) => void;
 }
 
+const https = "https://34.50.78.80";
+const http = "http://localhost:5000";
+
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000/api/v1",
+  baseURL: `${https}/api/v1`,
   headers: {
     "Content-Type": "application/json",
   },
@@ -67,7 +70,7 @@ axiosInstance.interceptors.response.use(
 
       try {
         const response: AxiosResponse = await axios.post(
-          "http://localhost:5000/api/v1/refresh",
+          `${https}/api/v1/refresh`,
           {},
           { withCredentials: true }
         );

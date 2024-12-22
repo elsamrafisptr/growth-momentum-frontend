@@ -32,14 +32,12 @@ const UserPreferenceForm = () => {
   useEffect(() => {
     const fetchPreferences = async () => {
       const response = await axiosInstance.get("/preferences");
-      
-      setPreferences(response.data.data)
+
+      setPreferences(response.data.data);
       return response;
     };
     fetchPreferences();
   }, []);
-
-  console.log(preferences)
 
   const selectedPreferences: string[] = formData.preferences || [];
 
@@ -90,6 +88,9 @@ const UserPreferenceForm = () => {
         if (response.status === 201) {
           setIsOpen(false);
           setCurrentStep(1);
+          window.location.reload();
+
+          return;
         } else {
           throw new Error("Unexpected response from server.");
         }
@@ -108,7 +109,6 @@ const UserPreferenceForm = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Label */}
       <Label>
         Tags <span className="italic">(min: 3, max: 5)</span>
       </Label>
@@ -176,7 +176,6 @@ const UserPreferenceForm = () => {
         </PopoverContent>
       </Popover>
 
-      {/* Submit Button */}
       <Button
         onClick={() => onSubmit(formData)}
         className="mt-4"

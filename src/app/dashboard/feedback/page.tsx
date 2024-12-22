@@ -1,7 +1,7 @@
-import React from "react";
+import Feedback from "@/components/layouts/Feedback";
 
 const FeedbackPage = () => {
-  return <div>FeedbackPage</div>;
+  return <Feedback />;
 };
 
 export default FeedbackPage;

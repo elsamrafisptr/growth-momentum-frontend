@@ -22,9 +22,7 @@ import {
 import { useNewUserModal } from "@/context/NewUserModalContext";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axiosInstance from "@/lib/axios";
 
-// Zod schema with validation messages for clarity
 export const detailUserSchema = z.object({
   age: z.coerce
     .number()

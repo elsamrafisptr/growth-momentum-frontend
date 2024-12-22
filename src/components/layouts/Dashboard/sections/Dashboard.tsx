@@ -1,111 +1,132 @@
 "use client";
 
 import CardModule, { CardProps } from "@/components/elements/CardModule";
-import React from "react";
+import { useEffect, useState } from "react";
 import NewUserModal from "./newUserModal/NewUserModal";
 import { NewUserModalProvider } from "@/context/NewUserModalContext";
-import Autoplay from "embla-carousel-autoplay";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import axiosInstance from "@/lib/axios";
 
-const Dashboard = ({
-  profile,
-  recommendations,
-}: {
-  profile: any;
-  recommendations: CardProps[];
-}) => {
-  const plugin = React.useRef(
-    Autoplay({
-      delay: 2000,
-      stopOnInteraction: true,
-    })
-  );
+const Dashboard = () => {
+  const [profile, setProfile] = useState<any>(null);
+  const [recommendations, setRecommendations] = useState<CardProps[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchData = async () => {
+    try {
+      const token = sessionStorage.getItem("token");
+      if (!token) {
+        throw new Error("No access token found in session storage");
+      }
+
+      let profileResponse = await axiosInstance.get("/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      let profile = profileResponse?.data?.profile || {};
+
+      let preferences: any = profile.preferences || [];
+
+      if (typeof preferences === "string") {
+        preferences = preferences
+          .replace(/[{}]/g, "")
+          .split(",")
+          .map((item) => item.trim().replace(/"/g, ""));
+      }
+
+      const profileWithPreferences = { ...profileResponse, preferences };
+
+      if (!profileWithPreferences || !profileWithPreferences.preferences) {
+        throw new Error("Invalid profile data received");
+      }
+
+      setProfile(profileWithPreferences);
+
+      let recommendationsResponse = await axiosInstance.get(
+        "/recommendations",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (recommendationsResponse.status !== 200) {
+        throw new Error("Failed to fetch recommendations");
+      }
+
+      setRecommendations(recommendationsResponse.data.recommendations || []);
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (profile && profile.preferences?.length > 0) {
+    }
+  }, [profile]);
+
   return (
     <>
       <NewUserModalProvider profile={profile}>
         <NewUserModal />
       </NewUserModalProvider>
 
-      {/* flex gap-6 overflow-x-scroll w-[1071px] h-[408px] */}
-      {/* Dashboard content */}
       <div className="w-full h-full flex p-12">
         <div className="flex flex-col gap-4 items-center">
           {/* Recommendations For You */}
           <div className="flex flex-col gap-4 w-full">
             <h1 className="font-bold text-2xl">Recommendations For You</h1>
-            <div className="grid grid-cols-3 gap-6">
-              {recommendations.map((course: CardProps, index: number) => {
-                return (
-                  <CardModule
-                    key={index}
-                    title={course.title}
-                    short_intro={course.short_intro}
-                    url={course.url}
-                    category={course.category}
-                    sub_category={course.sub_category}
-                    skills={course.skills}
-                    rating={course.rating}
-                    number_of_viewers={course.number_of_viewers}
-                    duration={course.duration}
-                    level={course.level}
-                    preference={course.preference}
-                  />
-                );
-              })}
-            </div>
-            {/* <Carousel
-              plugins={[plugin.current]}
-              className="w-full max-w-4xl overflow-x-auto"
-              opts={{
-                align: "start",
-              }}
-            >
-              <CarouselContent className="-ml-4">
-                {recommendations.map((course: CardProps, index: number) => {
-                  return (
-                    <CarouselItem key={index} className="pl-2 md:basis-1/3">
-                      <div className="p-1">
-                        <CardModule
-                          title={course.title}
-                          short_intro={course.short_intro}
-                          url={course.url}
-                          category={course.category}
-                          sub_category={course.sub_category}
-                          skills={course.skills}
-                          rating={course.rating}
-                          number_of_viewers={course.number_of_viewers}
-                          duration={course.duration}
-                          level={course.level}
-                          preference={course.preference}
-                        />
-                      </div>
-                    </CarouselItem>
-                  );
-                })}
-              </CarouselContent>
-              <CarouselPrevious className="absolute left-0 z-10" />
-              <CarouselNext className="absolute right-0 z-10" />
-            </Carousel> */}
+
+            {loading ? (
+              <p>Loading...</p>
+            ) : error ? (
+              <p className="text-red-500">{error}</p>
+            ) : (
+              <div className="grid grid-cols-3 gap-6">
+                {recommendations
+                  .slice(0, 21)
+                  .map((course: CardProps, index: number) => (
+                    <CardModule
+                      key={index}
+                      title={course.title}
+                      short_intro={course.short_intro}
+                      url={course.url}
+                      category={course.category}
+                      sub_category={course.sub_category}
+                      skills={course.skills}
+                      rating={course.rating}
+                      number_of_viewers={course.number_of_viewers}
+                      duration={course.duration}
+                      level={course.level}
+                      preference={course.preference}
+                    />
+                  ))}
+              </div>
+            )}
 
             {/* Recommendations Genre Based */}
             <div className="flex flex-col gap-4 w-full">
               <h1 className="font-bold text-2xl">
-                Recommendations of Your Genre
+                Recommendations of Your Genre{" "}
+                <p className="font-light text-base">(Coming Soon)</p>
               </h1>
-              <div className="flex gap-6 overflow-x-scroll w-[1071px] h-[800px]"></div>
             </div>
-            {/* Most Favourites */}
-            <div className="flex flex-col gap-4 w-full">
+
+            {/* Most Favourite Courses */}
+            <div className="flex flex-col gap-4 w-full pb-12">
               <h1 className="font-bold text-2xl">
-                Most Favourite Courses
+                Most Favourite Courses{" "}
+                <p className="font-light text-base">(Coming Soon)</p>
               </h1>
-              <div className="flex gap-6 overflow-x-scroll w-[1071px] h-[800px]"></div>
             </div>
           </div>
         </div>
