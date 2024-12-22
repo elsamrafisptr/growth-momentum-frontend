@@ -6,11 +6,14 @@ import Sidebar from "../elements/Sidebar";
 import { usePathname } from "next/navigation";
 import { TooltipProvider } from "../ui/tooltip";
 import HeaderDashboard from "../elements/HeaderDashboard";
+import useIsMobile from "@/hooks/useIsMobile";
 
 const Layouts = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
   const ForbiddenDashboardRoute =
     pathname === "/" || pathname === "/register" || pathname === "/login";
+  const isMobile = useIsMobile();
+
   return (
     <TooltipProvider delayDuration={0}>
       <div
@@ -19,13 +22,15 @@ const Layouts = ({ children }: { children: ReactNode }) => {
       >
         {!ForbiddenDashboardRoute && (
           <>
-            <Sidebar />
+            {isMobile ? <></> : <Sidebar />}
             <HeaderDashboard />
           </>
         )}
         <main
           className={cn(
-            "no-scrollbar w-full scroll-smooth transition-all duration-300 lg:h-screen bg-gray-50 dark:bg-[#1E1E1E]", !ForbiddenDashboardRoute && "md:pr-24 md:pl-64 md:py-24 lg:min-h-screen"
+            "no-scrollbar w-full scroll-smooth transition-all duration-300 lg:h-screen bg-gray-50 dark:bg-[#1E1E1E]",
+            !ForbiddenDashboardRoute &&
+              "md:pr-24 md:pl-64 md:py-24 lg:min-h-screen"
           )}
         >
           {children}

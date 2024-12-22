@@ -39,6 +39,14 @@ const RegisterPage = () => {
             </div>
             <RegisterForm />
             <p className="px-8 text-center text-sm text-muted-foreground">
+              <Link
+                href="/login"
+                className="hover:text-brand underline underline-offset-4"
+              >
+                Already have an account? Sign In
+              </Link>
+            </p>
+            <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking register, you agree to our{" "}
               <span className="hover:text-brand underline underline-offset-4">
                 Terms of Service
