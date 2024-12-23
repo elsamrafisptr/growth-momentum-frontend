@@ -15,9 +15,9 @@ const SidebarLink = ({ route, label, icon, isActive, isOpen }: any) => {
     <Link
       href={route}
       className={cn(
-        "flex items-center gap-4 py-2.5 transition-all duration-300 hover:bg-green-800/10 rounded w-full px-4",
+        "flex w-full items-center gap-4 rounded px-4 py-2.5 transition-all duration-300 hover:bg-green-800/10",
         isActive &&
-          "bg-green-800/10 text-green-950 hover:bg-green-800/20 font-medium"
+          "bg-green-800/10 font-medium text-green-950 hover:bg-green-800/20",
       )}
     >
       <div>{icon}</div>
@@ -35,7 +35,7 @@ const SidebarLink = ({ route, label, icon, isActive, isOpen }: any) => {
             }),
             "size-12 dark:hover:bg-gray-600",
             isActive &&
-              "bg-blue-600 fill-white hover:bg-blue-700 dark:bg-blue-400 dark:hover:bg-blue-300"
+              "bg-blue-600 fill-white hover:bg-blue-700 dark:bg-blue-400 dark:hover:bg-blue-300",
           )}
         >
           <div>{icon}</div>
@@ -66,7 +66,7 @@ const Sidebar = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("username");
@@ -81,16 +81,16 @@ const Sidebar = () => {
   if (pathname === "/auth/login" || pathname === "/auth/register") return null;
 
   return (
-    <div className="fixed top-0 left-0 h-screen border-r border-r-gray-300 z-50">
+    <div className="fixed left-0 top-0 z-50 h-screen border-r border-r-gray-300">
       <div
         className={cn(
-          "transition-all duration-300 flex flex-col justify-between bg-white dark:bg-[#060606] h-full px-4 py-6",
-          isOpen ? "w-64" : "w-20"
+          "flex h-full flex-col justify-between bg-white px-4 py-6 transition-all duration-300 dark:bg-[#060606]",
+          isOpen ? "w-64" : "w-20",
         )}
       >
         <div>
           <h1 className="p-6 font-bold italic underline">Growth Momentum</h1>
-          <nav className="flex flex-col items-center gap-2.5 mt-4">
+          <nav className="mt-4 flex flex-col items-center gap-2.5">
             {SIDEBAR_NAVIGATION.map((item, index) => (
               <article key={index} className="w-full">
                 <SidebarLink

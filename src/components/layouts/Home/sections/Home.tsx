@@ -3,12 +3,12 @@ import Link from "next/link";
 
 const Home = () => {
   return (
-    <main className="w-full h-screen flex justify-center items-center px-5">
-      <div className="flex flex-col gap-4 items-center">
-        <h1 className="font-bold text-xl text-center">
+    <main className="flex h-screen w-full items-center justify-center px-5">
+      <div className="flex flex-col items-center gap-4">
+        <h1 className="text-center text-xl font-bold">
           Welcome to Growth Momentum Website Apps
         </h1>
-        <p className="text text-xs md:text-sm font-light italic text-center max-w-2xl">
+        <p className="text max-w-2xl text-center text-xs font-light italic md:text-sm">
           This website is used for final project research with the title
           “Evaluation of Diversity and Novelty of Recommendation Systems on
           Digital Learning Platforms Based on Usability and User Satisfaction”.

@@ -54,7 +54,7 @@ const Dashboard = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
 
       if (recommendationsResponse.status !== 200) {
@@ -84,11 +84,11 @@ const Dashboard = () => {
         <NewUserModal />
       </NewUserModalProvider>
 
-      <div className="w-full h-full flex p-5 md:p-12 mt-20 md:mt-0">
-        <div className="flex flex-col gap-4 items-center">
+      <div className="mt-20 flex h-full w-full p-5 md:mt-0 md:p-12">
+        <div className="flex flex-col items-center gap-4">
           {/* Recommendations For You */}
-          <div className="flex flex-col gap-4 w-full">
-            <h1 className="font-bold text-2xl">Recommendations For You</h1>
+          <div className="flex w-full flex-col gap-4">
+            <h1 className="text-2xl font-bold">Recommendations For You</h1>
 
             {loading ? (
               <p>Loading...</p>
@@ -98,7 +98,7 @@ const Dashboard = () => {
               <div
                 className={cn(
                   "grid gap-6",
-                  isMobile ? "grid-cols-1" : "grid-cols-3"
+                  isMobile ? "grid-cols-1" : "grid-cols-3",
                 )}
               >
                 {recommendations
@@ -123,18 +123,18 @@ const Dashboard = () => {
             )}
 
             {/* Recommendations Genre Based */}
-            <div className="flex flex-col gap-4 w-full">
-              <h1 className="font-bold text-2xl">
+            <div className="flex w-full flex-col gap-4">
+              <h1 className="text-2xl font-bold">
                 Recommendations of Your Genre{" "}
-                <p className="font-light text-base">(Coming Soon)</p>
+                <p className="text-base font-light">(Coming Soon)</p>
               </h1>
             </div>
 
             {/* Most Favourite Courses */}
-            <div className="flex flex-col gap-4 w-full pb-12">
-              <h1 className="font-bold text-2xl">
+            <div className="flex w-full flex-col gap-4 pb-12">
+              <h1 className="text-2xl font-bold">
                 Most Favourite Courses{" "}
-                <p className="font-light text-base">(Coming Soon)</p>
+                <p className="text-base font-light">(Coming Soon)</p>
               </h1>
             </div>
           </div>

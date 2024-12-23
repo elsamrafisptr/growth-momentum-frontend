@@ -4,6 +4,7 @@ import useIsMobile from "@/hooks/useIsMobile";
 import { useEffect, useState } from "react";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -33,7 +34,7 @@ const HeaderDashboard = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
+        },
       );
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("username");
@@ -64,9 +65,9 @@ const HeaderDashboard = () => {
   if (pathname === "/auth/login" || pathname === "/auth/register") return null;
 
   return (
-    <header className="h-20 md:h-24 z-10 w-full bg-white fixed top-0 left-0 md:pl-64 flex items-center border-b border-b-gray-300">
-      <div className="w-full flex justify-between px-5 md:px-0 items-center">
-        <h1 className="font-bold text-base md:text-xl max-w-48 md:max-w-full md:px-12">
+    <header className="fixed left-0 top-0 z-10 flex h-20 w-full items-center border-b border-b-gray-300 bg-white md:h-24 md:pl-64">
+      <div className="flex w-full items-center justify-between px-5 md:px-0">
+        <h1 className="max-w-48 text-base font-bold md:max-w-full md:px-12 md:text-xl">
           Welcome back, {username || "Guest"} 👋
         </h1>
         {isMobile && (
@@ -78,7 +79,7 @@ const HeaderDashboard = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="h-6 w-6"
                 aria-label="Menu"
               >
                 <path
@@ -90,23 +91,31 @@ const HeaderDashboard = () => {
             </SheetTrigger>
             <SheetContent>
               <SheetHeader className="my-6">
-                <SheetTitle className="italic underline text-left">
+                <SheetTitle className="text-left italic underline">
                   Growth Momentum
                 </SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-4">
-                <Link href="/dashboard" className="hover:underline">
-                  Dashboard
-                </Link>
-                <Link href="/dashboard/bookmark" className="hover:underline">
-                  My Bookmark
-                </Link>
-                <Link href="/dashboard/feedback" className="hover:underline">
-                  Feedback
-                </Link>
-                <Link href="/dashboard/profile" className="hover:underline">
-                  Profile
-                </Link>
+                <SheetClose asChild>
+                  <Link href="/dashboard" className="hover:underline">
+                    Dashboard
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link href="/dashboard/bookmark" className="hover:underline">
+                    My Bookmark
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link href="/dashboard/feedback" className="hover:underline">
+                    Feedback
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link href="/dashboard/profile" className="hover:underline">
+                    Profile
+                  </Link>
+                </SheetClose>
                 <Button onClick={handleLogout} disabled={isLoading}>
                   {isLoading ? "Logging out..." : "Logout"}
                 </Button>

@@ -46,7 +46,7 @@ const UserPreferenceForm = () => {
   const filteredGenres = useMemo(() => {
     return (
       preferences?.filter((genre) =>
-        genre?.toLowerCase().includes(searchTerm.toLowerCase())
+        genre?.toLowerCase().includes(searchTerm.toLowerCase()),
       ) || []
     );
   }, [preferences, searchTerm]);
@@ -55,8 +55,8 @@ const UserPreferenceForm = () => {
     const updatedPreferences = selectedPreferences.includes(genre)
       ? selectedPreferences.filter((p: string) => p !== genre)
       : selectedPreferences.length < 5
-      ? [...selectedPreferences, genre]
-      : selectedPreferences;
+        ? [...selectedPreferences, genre]
+        : selectedPreferences;
 
     setFormData({ ...formData, preferences: updatedPreferences });
     setSearchTerm("");
@@ -64,7 +64,7 @@ const UserPreferenceForm = () => {
 
   const handleRemove = (genre: string) => {
     const updatedPreferences = selectedPreferences.filter(
-      (p: string) => p !== genre
+      (p: string) => p !== genre,
     );
     setFormData({ ...formData, preferences: updatedPreferences });
   };
@@ -84,7 +84,7 @@ const UserPreferenceForm = () => {
           },
           {
             withCredentials: true,
-          }
+          },
         );
 
         if (response.status === 201) {
@@ -125,15 +125,15 @@ const UserPreferenceForm = () => {
                 return (
                   <div
                     key={index}
-                    className="flex items-center gap-1 px-2 py-1 mb-1 text-sm bg-gray-200 text-gray-800 rounded w-fit"
+                    className="mb-1 flex w-fit items-center gap-1 rounded bg-gray-200 px-2 py-1 text-left text-sm text-gray-800"
                   >
                     {preference}
                     <button
                       type="button"
-                      className="p-1"
+                      className="p-1 text-left"
                       onClick={() => handleRemove(preference)}
                     >
-                      <X className="w-3 h-3" />
+                      <X className="h-3 w-3" />
                     </button>
                   </div>
                 );
@@ -141,13 +141,13 @@ const UserPreferenceForm = () => {
             </div>
           )}
         </PopoverTrigger>
-        <PopoverContent side={isMobile ? "bottom" : "right"}>
-          <Command>
+        {isMobile ? (
+          <Command className="border">
             <CommandInput placeholder="Search Preference" />
             <CommandList>
               <CommandEmpty>No Preference Found</CommandEmpty>
               <CommandGroup className="">
-                <ScrollArea className="h-72">
+                <ScrollArea className="h-40">
                   {filteredGenres.map((preference: string | never, index) => {
                     return (
                       <CommandItem
@@ -155,7 +155,7 @@ const UserPreferenceForm = () => {
                         className={cn(
                           "flex items-center justify-between",
                           selectedPreferences.includes(preference) &&
-                            "bg-gray-100"
+                            "bg-gray-100",
                         )}
                         onSelect={() => handleSelect(preference)}
                       >
@@ -165,7 +165,7 @@ const UserPreferenceForm = () => {
                             "mr-2 h-4 w-4",
                             selectedPreferences.includes(preference)
                               ? "opacity-100"
-                              : "opacity-0"
+                              : "opacity-0",
                           )}
                         />
                       </CommandItem>
@@ -175,7 +175,43 @@ const UserPreferenceForm = () => {
               </CommandGroup>
             </CommandList>
           </Command>
-        </PopoverContent>
+        ) : (
+          <PopoverContent side={isMobile ? "bottom" : "right"}>
+            <Command>
+              <CommandInput placeholder="Search Preference" />
+              <CommandList>
+                <CommandEmpty>No Preference Found</CommandEmpty>
+                <CommandGroup className="">
+                  <ScrollArea className="h-72">
+                    {filteredGenres.map((preference: string | never, index) => {
+                      return (
+                        <CommandItem
+                          key={index}
+                          className={cn(
+                            "flex items-center justify-between",
+                            selectedPreferences.includes(preference) &&
+                              "bg-gray-100",
+                          )}
+                          onSelect={() => handleSelect(preference)}
+                        >
+                          {preference}
+                          <Check
+                            className={cn(
+                              "mr-2 h-4 w-4",
+                              selectedPreferences.includes(preference)
+                                ? "opacity-100"
+                                : "opacity-0",
+                            )}
+                          />
+                        </CommandItem>
+                      );
+                    })}
+                  </ScrollArea>
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        )}
       </Popover>
 
       <Button

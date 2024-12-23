@@ -47,7 +47,7 @@ const AllCourses = () => {
 
         const data = res.data.data;
         setCourses((prevCourses) =>
-          page === 1 ? data : [...prevCourses, ...data]
+          page === 1 ? data : [...prevCourses, ...data],
         );
       } catch (err) {
         setError("Error fetching courses");
@@ -72,7 +72,7 @@ const AllCourses = () => {
 
   return (
     <>
-      <div className="relative w-full h-full flex flex-col p-12">
+      <div className="relative flex h-full w-full flex-col p-12">
         {/* Search Bar and Filter */}
         <div className="flex gap-6">
           <Input

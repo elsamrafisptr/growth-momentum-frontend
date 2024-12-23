@@ -14,7 +14,7 @@ export type IUser = {
 };
 
 const passwordValidation = new RegExp(
-  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/
+  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/,
 );
 
 export const registerSchema = z.object({
@@ -31,9 +31,7 @@ export const registerSchema = z.object({
   password: z
     .string()
     .min(1, { message: "Must have at least 1 character" })
-    .regex(passwordValidation, {
-      message: "Your password is not valid",
-    }),
+    .min(8, { message: "Minimum have 8 Character" }),
 });
 
 export default function useRegisterForm() {

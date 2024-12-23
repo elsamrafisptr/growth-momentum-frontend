@@ -26,7 +26,7 @@ axiosInstance.interceptors.request.use(
 
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 let isRefreshing = false;
@@ -72,7 +72,7 @@ axiosInstance.interceptors.response.use(
         const response: AxiosResponse = await axios.post(
           `${https}/api/v1/refresh`,
           {},
-          { withCredentials: true }
+          { withCredentials: true },
         );
 
         const newToken = response.data.access_token;
@@ -102,7 +102,7 @@ axiosInstance.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;
