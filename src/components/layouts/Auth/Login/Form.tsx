@@ -59,7 +59,7 @@ export default function LoginForm() {
             />
             <Button
               type="submit"
-              className="w-full disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full disabled:cursor-not-allowed disabled:opacity-50"
               disabled={!formValidation || isPending}
             >
               {isPending ? "Loading..." : "Login"}

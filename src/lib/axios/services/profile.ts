@@ -12,7 +12,6 @@ export const getUserDetailsData = async (token: any): Promise<any> => {
     if (response?.status !== 200) return {};
 
     return response;
-    
   } catch (error) {
     console.error("Error fetching user profile:", error);
   }

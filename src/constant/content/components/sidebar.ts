@@ -11,21 +11,6 @@ export const SIDEBAR_NAVIGATION = [
     route: dashboardBaseRoute + "/bookmark",
     icon: "",
   },
-  // {
-  //   label: "All Course",
-  //   route: dashboardBaseRoute + "/course",
-  //   icon: "",
-  // },
-  // {
-  //   label: "Usability Test",
-  //   route: dashboardBaseRoute + "/task",
-  //   icon: "",
-  // },
-  // {
-  //   label: "Satisfaction Form",
-  //   route: dashboardBaseRoute + "/form",
-  //   icon: "",
-  // },
   {
     label: "Feedback",
     route: dashboardBaseRoute + "/feedback",

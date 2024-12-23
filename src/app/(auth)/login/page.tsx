@@ -19,7 +19,7 @@ const LoginPage = () => {
           href="/"
           className={cn(
             buttonVariants({ variant: "ghost" }),
-            "absolute left-4 top-4 md:left-8 md:top-8"
+            "absolute left-4 top-4 md:left-8 md:top-8",
           )}
         >
           <>
@@ -32,12 +32,12 @@ const LoginPage = () => {
             <h1 className="text-2xl font-semibold tracking-tight">
               Welcome back
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               Enter your email to sign in to your account
             </p>
           </div>
           <LoginForm />
-          <p className="px-8 text-center text-sm text-muted-foreground">
+          <p className="text-muted-foreground px-8 text-center text-sm">
             <Link
               href="/register"
               className="hover:text-brand underline underline-offset-4"

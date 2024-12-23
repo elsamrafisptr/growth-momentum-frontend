@@ -17,7 +17,7 @@ const Layouts = ({ children }: { children: ReactNode }) => {
   return (
     <TooltipProvider delayDuration={0}>
       <div
-        className="flex flex-col lg:flex-row lg:gap-5 justify-center overflow-x-hidden bg-gray-50 dark:bg-[#1E1E1E]"
+        className="flex flex-col justify-center overflow-x-hidden bg-gray-50 dark:bg-[#1E1E1E] lg:flex-row lg:gap-5"
         suppressHydrationWarning
       >
         {!ForbiddenDashboardRoute && (
@@ -28,9 +28,9 @@ const Layouts = ({ children }: { children: ReactNode }) => {
         )}
         <main
           className={cn(
-            "no-scrollbar w-full scroll-smooth transition-all duration-300 lg:h-screen bg-gray-50 dark:bg-[#1E1E1E]",
+            "no-scrollbar w-full scroll-smooth bg-gray-50 transition-all duration-300 dark:bg-[#1E1E1E] lg:h-screen",
             !ForbiddenDashboardRoute &&
-              "md:pr-24 md:pl-64 md:py-24 lg:min-h-screen"
+              "md:py-24 md:pl-64 md:pr-24 lg:min-h-screen",
           )}
         >
           {children}

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import {
   Card,
   CardContent,
@@ -38,26 +37,25 @@ const CardModule = ({
   const router = useRouter();
   const handleClick = () => {
     router.push(`${url}`);
-    alert("clicked");
   };
   return (
     <Card
       onClick={handleClick}
-      className="hover:cursor-pointer border-none shadow-none bg-transparent aspect-[5/4] h-max"
+      className="aspect-[5/4] h-max border-none bg-transparent shadow-none hover:cursor-pointer"
     >
       <CardHeader className="p-0">
-        <div className="aspect-video bg-gray-600 h-40 rounded p-3 flex items-end">
+        <div className="flex aspect-video h-40 items-end rounded bg-gray-600 p-3">
           <div className="flex flex-wrap gap-1">
-            <div className="bg-white w-fit py-0.5 px-2 rounded-full text-xs">
+            <div className="w-fit rounded-full bg-white px-2 py-0.5 text-xs">
               {category}
             </div>
-            <div className="bg-white w-fit py-0.5 px-2 rounded-full text-xs">
+            <div className="w-fit rounded-full bg-white px-2 py-0.5 text-xs">
               {sub_category}
             </div>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="px-0 py-2 space-y-2">
+      <CardContent className="space-y-2 px-0 py-2">
         <CardTitle className="">{title}</CardTitle>
         <CardDescription className="line-clamp-3">
           {short_intro}
@@ -79,7 +77,7 @@ const CardModule = ({
           </svg>
           {rating}
         </span>
-        <span className="flex gap-1 items-center">
+        <span className="flex items-center gap-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

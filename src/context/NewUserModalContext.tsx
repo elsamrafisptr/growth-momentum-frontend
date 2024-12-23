@@ -26,7 +26,7 @@ interface NewUserModalContextType {
 }
 
 const NewUserModalContext = createContext<NewUserModalContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const NewUserModalProvider = ({
@@ -70,7 +70,7 @@ export const NewUserModalProvider = ({
       formData,
       setFormData,
     }),
-    [isOpen, currentStep, formData]
+    [isOpen, currentStep, formData],
   );
 
   return (
@@ -85,7 +85,7 @@ export const useNewUserModal = (): NewUserModalContextType => {
 
   if (!context) {
     throw new Error(
-      "useNewUserModal must be used within a NewUserModalProvider"
+      "useNewUserModal must be used within a NewUserModalProvider",
     );
   }
 

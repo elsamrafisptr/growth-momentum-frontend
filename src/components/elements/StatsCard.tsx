@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface StatsCardProps {
   title: string;
@@ -10,7 +10,7 @@ interface StatsCardProps {
 
 const StatsCard = ({ title, stats, icon, route }: StatsCardProps) => {
   return (
-    <article className="bg-white aspect-[4/3] border border-gray-200 hover:border-gray-700">
+    <article className="aspect-[4/3] border border-gray-200 bg-white hover:border-gray-700">
       <div className="flex items-center gap-4">
         <div>{icon}</div>
         <span className="flex flex-col gap-2">

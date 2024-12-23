@@ -46,7 +46,7 @@ export default function useLoginForm() {
           },
           {
             withCredentials: true,
-          }
+          },
         );
 
         sessionStorage.setItem("token", response.data.token);

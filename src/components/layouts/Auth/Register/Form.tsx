@@ -70,7 +70,15 @@ export default function RegisterForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <FormLabel
+                    htmlFor="password"
+                    className="flex items-center gap-2"
+                  >
+                    Password{" "}
+                    <span className="text-xs font-normal text-red-700">
+                      (Min 8 Characters)
+                    </span>
+                  </FormLabel>
                   <FormControl>
                     <Input
                       id="password"
@@ -89,7 +97,7 @@ export default function RegisterForm() {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full disabled:cursor-not-allowed disabled:opacity-50"
               disabled={!isFormValid || isPending}
               aria-busy={isPending}
               aria-disabled={!isFormValid || isPending}
